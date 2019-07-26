@@ -1,0 +1,20 @@
+---
+- hosts: linux
+
+  tasks:
+    - name: Install httpd redhat
+      yum: name=httpd state=installed
+      when: ansible_facts['distribution'] == "CentOS"
+          
+    - name: Install httpd ubuntu
+      apt: name=apache2 state=installed
+      when: ansible_facts['distribution'] == "Ubuntu"
+      
+    - name: Start httpd
+      service: name=httpd state=started
+      when: ansible_facts['distribution'] == "CentOS"
+          
+    - name: Start httpd
+      service: name=apache2 state=started
+      when: ansible_facts['distribution'] == "Ubuntu"
+...
