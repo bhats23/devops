@@ -2,7 +2,7 @@
 - hosts: linux
 
   tasks:
-    - name: Install httpd redhat
+    - name: Install httpd Centos
       yum: name=httpd state=installed
       when: ansible_facts['distribution'] == "CentOS"
           
