@@ -1,0 +1,9 @@
+- hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Tasks for uptime
+      command: uptime
+      register: out_uptime  
+      
+    - debug: 
+         var: out_uptime

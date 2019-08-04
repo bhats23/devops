@@ -1,0 +1,9 @@
+- ec2:
+   key_name: AWS_AMI_NEW
+   instance_type: t2.micro
+   image: ami-0d2692b6acea72ee6
+   wait: yes
+   group: launch-wizard-8
+   count: 1
+   vpc_subnet_id: subnet-86ae20ca
+   assign_public_ip: yes

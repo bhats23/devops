@@ -1,0 +1,41 @@
+---
+- name: Create a new Demo EC2 instance
+  hosts: MithunCentos
+  gather_facts: False
+
+  vars:
+      region: ap-south-1
+      instance_type: t2.micro
+      ami: ami-5b673c34
+      keypair: redhat-mumbai-mithun 
+
+  tasks:
+
+    - name: Create an ec2 instance
+      ec2:
+         key_name: "{{ keypair }}"
+         aws_access_key: "{{ my_access_key }}"
+         aws_secret_key: "{{ my_secret_key }}"
+         group: "launch-wizard-2"
+         instance_type: "{{ instance_type}}"
+         image: "{{ ami }}"
+         wait: true
+         region: "{{ region }}"
+         count: 1  
+         count_tag:
+            Name: "mithun-ansible-Demo"
+         instance_tags:
+            Name: "mithun-ansible-Demo"
+         vpc_subnet_id: subnet-31aff659
+         assign_public_ip: yes
+      register: ec2
+
+    - name: debuging
+      debug: var=ec2
+
+    - name: Set authorized key taken from file
+      authorized_key:
+        user: mithun
+        state: present
+        key: "{{ lookup('file', '/home/mithun/.ssh/id_rsa.pub') }}"
+...

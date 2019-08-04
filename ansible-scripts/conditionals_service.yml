@@ -1,0 +1,15 @@
+---
+-
+  name: Execute a script on all web server nodes
+  gather_facts: false
+  hosts: centos1
+  tasks:
+    - name: install mysql on Centos1
+      yum:
+        name: mysql
+        state: latest
+
+#    - name: Start mysql service
+#      service: name=mysql state=started
+#      when: ansible_host=='centos1'
+...

@@ -1,0 +1,14 @@
+-
+  name: Add name server entry if not already entered
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - shell: cat /etc/resolv.conf
+      register: command_output
+
+    - shell: echo '10.10.10.10' >> /etc/resolv.conf
+      when: command_output.stdout.find('10.10.10.10') == -1
+      ignore_errors: yes
+
+    - debug:
+         var: command_output

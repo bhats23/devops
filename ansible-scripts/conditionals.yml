@@ -1,0 +1,10 @@
+---
+- hosts: localhost
+  gather_facts: false
+  vars: 
+    age: 15
+  tasks:
+    - debug:
+        msg:  I am a child
+      when: age < 18
+...
